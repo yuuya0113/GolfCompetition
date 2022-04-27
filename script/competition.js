@@ -2,25 +2,47 @@ let memberlist,prenum,memberscore,memberpat,membertotal,out_count,in_count,par_c
 	out_par,in_par;
 let hidden = [];
 
+function saving(){
+	getnum = Number(document.getElementById('number').value);
+	let save = {
+	'list'  : memberlist,
+	'score' : memberscore,
+	'pat'   : memberpat,
+	'total' : membertotal,
+	'getnum': getnum};
+	let setjson = JSON.stringify(save);
+	localStorage.setItem('savedata', setjson);
+}
 
 //読み込み時自動実行
 window.addEventListener("DOMContentLoaded", function(){
-//	document.getElementById('handler').addEventListener('click', mark);
-	memberlist = new Array(100);
-	prenum = 1
-	memberscore = new Array(100);
-	memberpat = new Array(100);
-	membertotal = new Array(100);
-	for(var x=0;x<=100;x++){
-		memberlist[x]="";
-		memberscore[x]=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-		memberpat[x]=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-		membertotal[x]=[0,0,0,0]
+	let getjson = localStorage.getItem('savedata');
+	let load = JSON.parse(getjson);
+	if(load ==null){
+		memberlist = new Array(100);
+		prenum = 1
+		getnum = 1
+		memberscore = new Array(100);
+		memberpat = new Array(100);
+		membertotal = new Array(100);
+		for(var x=0;x<=100;x++){
+			memberlist[x]="";
+			memberscore[x]=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+			memberpat[x]=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+			membertotal[x]=[0,0,0,0]
+		}
+	}else{
+		prenum = 1
+		memberlist = load['list'];
+		memberscore = load['score'];
+		memberpat = load['pat'];
+		membertotal = load['total'];
+		getnum = load['getnum'];
 	}
-
 //コース・プレイヤー表示
 	course_table(false);
-	player_table(1);
+	player_table(getnum);
+	changing();
 })
 
 //コース表示
@@ -211,6 +233,8 @@ function changing(e){
 	if(document.getElementById('checkbox').checked){
 		handichecking();
 	}
+	get_score();
+	saving();
 	bgcol();
 }
 
