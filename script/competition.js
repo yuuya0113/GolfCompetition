@@ -211,25 +211,31 @@ function changing(e){
 }
 
 function check(e){
-		let zerocheck = false;
-		getnum = Number(document.getElementById('number').value);
-		for(var x = 0; x <= getnum; x++){
-			for(var y = 1; y <= 18; y++){
-				if(document.getElementById(x+'hole'+y).value == "0"){
-					zerocheck = true;
-					break;
-				}
+	let zerocheck = false;
+	let flag;
+	getnum = Number(document.getElementById('number').value);
+	for(var x = 0; x <= getnum; x++){
+		for(var y = 1; y <= 18; y++){
+			if(document.getElementById(x+'hole'+y).value == "0"){
+				zerocheck = true;
+				break;
 			}
 		}
-//		if(zerocheck){
-//			window.alert('未入力の箇所があります。')
-//			return;
-//		}
+	}
+	if(zerocheck){
+		window.alert('未入力の箇所があります。')
+		return;
+	}
 	if(document.getElementById('checkbox').checked && out_count+in_count < 1){
 		window.alert('隠しホールが選択されていません。');
 		return;
 	}
-	if(!window.confirm('集計を開始してよろしいでしょうか？')){
+	if(!document.getElementById('checkbox').checked){
+		flag = window.confirm('隠しホールをランダム選択して\n集計を開始してよろしいでしょうか？')
+	}else{
+		flag = window.confirm('集計を開始してよろしいでしょうか？')
+	}
+	if(!flag){
 		return;
 	}else{
 		if(document.getElementById('checkbox').checked && out_count+in_count!=12){
@@ -366,6 +372,7 @@ function kumiawase(balls, nukitorisu){
   return arrs;
 }
 
+/*
 function test(e){
 	memberscore[0]=[0,3,3,4,4,4,4,4,5,5,3,3,4,4,4,4,4,5,5]
 	changing();
@@ -379,3 +386,4 @@ function test(e){
 	}
 
 }
+*/
