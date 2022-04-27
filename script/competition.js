@@ -144,8 +144,12 @@ function selector(k,j,text,sel){
 
 //プレイヤー再表示
 function player_number(e){
-	get_score();
 	let getnum = Number(document.getElementById('number').value);
+	if(getnum >100 || getnum < 1){
+		window.alert('入力された数値が不正です。');
+		return;
+	}
+	get_score();
 	for(var x=1; x<=prenum; x++){
 		memberlist[x] = document.getElementById('name'+x).value;
 	}
