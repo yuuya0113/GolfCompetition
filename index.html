@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>コンペティション</title>
+</head>
+<body>
+<div id = hole></div>
+<label>
+<input id = checkbox type="checkbox" onChange="checking()">隠しホールを手動で設定<br>
+</label>
+<span id = handiself></span><br><hr><br>
+参加人数：<input type=number id=number min=1 max=100
+				 value=1 style="width:3em" onChange="player_number(this)">
+<!--<input type= button value=変更>-->
+<div id = player></div>
+<p id = console><p>
+<input type= button value=集計 onclick="check(this)">
+<input type= button value=test onclick="test(this)">
+<script src="script/competition.js"></script>
+</body>
+</html>
